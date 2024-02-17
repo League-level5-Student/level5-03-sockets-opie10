@@ -66,6 +66,7 @@ public class Server {
 		try {
 			if (os != null) {
 				os.writeObject("CLICK SENT FROM SERVER");
+				
 				os.flush();
 			}
 		} catch (IOException e) {
