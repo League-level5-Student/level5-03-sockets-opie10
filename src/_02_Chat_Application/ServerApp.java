@@ -66,7 +66,8 @@ package _02_Chat_Application;
 		}
 
 		public void sendMessage(String message) {
-			System.out.println("Server: "+message);
+			//System.out.println("Server: "+message);
+			
 			try {
 				if (os != null) {
 					os.writeObject("Message from server:\n"+message);
