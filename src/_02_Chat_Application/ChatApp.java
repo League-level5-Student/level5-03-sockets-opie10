@@ -30,12 +30,11 @@ public class ChatApp extends JFrame {
 			server = new ServerApp(8080);
 			setTitle("SERVER");
 			JOptionPane.showMessageDialog(null, "Server started at: " + server.getIPAddress() + "\nPort: " + server.getPort());
-			String message = "";
-			message =JOptionPane.showInputDialog("Input message here:");
-			
-			server.sendMessage(message);
 			
 			server.start();
+			
+			
+			
 			
 		}else{
 			setTitle("CLIENT");
@@ -43,12 +42,10 @@ public class ChatApp extends JFrame {
 			String prtStr = JOptionPane.showInputDialog("Enter the port number");
 			int port = Integer.parseInt(prtStr);
 			client = new ClientApp(ipStr, port);
-			String message = "";
-			message =JOptionPane.showInputDialog("Input message here:");
-			
-			client.sendMessage(message);
-			
 			client.start();
+			
+			
+			
 			
 		}
 	}
