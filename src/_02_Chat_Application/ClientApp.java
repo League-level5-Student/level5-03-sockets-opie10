@@ -2,9 +2,12 @@ package _02_Chat_Application;
 
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Reader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -19,7 +22,7 @@ public class ClientApp {
 
 	ObjectOutputStream os;
 	ObjectInputStream is;
-
+	
 	public ClientApp(String ip, int port) {
 		this.ip = ip;
 		this.port = port;
@@ -32,20 +35,39 @@ public class ClientApp {
 			Scanner scan = new Scanner(System.in);
 			os = new ObjectOutputStream(connection.getOutputStream());
 			is = new ObjectInputStream(connection.getInputStream());
-
+			BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 			os.flush();
 			
 			
 		
-			System.out.println("Client - PreConnect");
+			
 		while (connection.isConnected()) {
-			System.out.println("Client - Connect");
+			//if(is.available()!=0) {
+			
+			//}
+				
 				//JOptionPane.showMessageDialog(null, is.readObject());
 				//System.out.println(is.readObject());
-				String message ="";
-				System.out.println("Client: \n");
-				message = scan.nextLine();
+			
+			if(is.available()==0&&bf.ready()) {
+				System.out.println("Client: ");
+					String message ="";
+				
+				
+				message = bf.readLine();
 				sendMessage(message);
+			}else if(is.available()!=0) {
+				try {
+					System.out.println(is.readObject());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+				}
+			
 		}
 		}
 			 catch (Exception e) {
@@ -53,25 +75,28 @@ public class ClientApp {
 				e.printStackTrace();
 			}
 		
+		
 	}
 	
 	public void sendMessage(String message) {
-		System.out.println(os.equals(null));
-		System.out.println("Client: "+message);
+		
+		//System.out.println("Client: "+message);
 		try {
 			if (os != null) {
-				os.writeObject("Message from Client:\n"+message);
-				try {
-					System.out.println(is.readObject());
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				os.writeObject("Client: "+message);
+//				try {
+//	//				System.out.println(is.readObject());
+//				} catch (ClassNotFoundException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				
 				os.flush();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
+	
 }
