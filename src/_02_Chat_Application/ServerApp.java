@@ -55,7 +55,7 @@ public class ServerApp {
 				message = bf.readLine();
 
 				sendMessage(message);
-				}else if(is.available()!=0){
+				}//else if(is.available()!=0){
 				try {
 					System.out.println(is.readObject());
 				} catch (IOException e) {
@@ -64,7 +64,7 @@ public class ServerApp {
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				//}
 				// }catch(Exception e) {
 				// JOptionPane.showMessageDialog(null, "Connection Lost");
 				// System.exit(0);

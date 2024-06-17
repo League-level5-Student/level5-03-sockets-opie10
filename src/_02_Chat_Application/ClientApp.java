@@ -32,6 +32,7 @@ public class ClientApp {
 		try {
 
 			connection = new Socket(ip, port);
+			
 			Scanner scan = new Scanner(System.in);
 			os = new ObjectOutputStream(connection.getOutputStream());
 			is = new ObjectInputStream(connection.getInputStream());
